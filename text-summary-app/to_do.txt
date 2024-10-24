@@ -1,0 +1,3 @@
+the background color should be blue
+the gui should be like the pdf sent
+there should be a menu bar
