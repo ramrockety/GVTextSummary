@@ -64,34 +64,42 @@ body {
 
 .text-area-container {
   display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.translate-button {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.translate-button:hover {
-  background-color: #0069d9;
+  gap: 150px;
+  margin-bottom: 20px;
 }
 
 .text-area {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 350px;
 }
 
 .text-area textarea {
   width: 100%;
-  height: 150px;
-  padding: 10px;
+  height: 100px;
+  padding: 70px;
   border: 1px solid #ccc;
   border-radius: 5px;
   resize: none;
+  font-size: 16px;
+}
+
+.translate-buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.translate-button {
+  padding: 10px 100px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.translate-button:hover {
+  background-color: #0069d9;
 }

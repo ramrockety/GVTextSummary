@@ -6,19 +6,15 @@ function App() {
   const [translatedText, setTranslatedText] = useState("");
 
   const handleFileUpload = (e) => {
-    // Implement file handling logic here
     const file = e.target.files[0];
     console.log("File uploaded:", file);
-    // You can add file reading and processing logic here
   };
 
   const handleSummarize = () => {
-    // Implement summarization logic here
     setSummary("This is the summarized text.");
   };
 
   const handleTranslate = () => {
-    // Implement translation logic here
     setTranslatedText("This is the translated text.");
   };
 
@@ -38,7 +34,6 @@ function App() {
           <button className="download-button">Download Text</button>
         </div>
         <div className="text-area-container">
-          <button className="translate-button" onClick={handleTranslate}>Translate text (26 languages)</button>
           <div className="text-area">
             <textarea
               placeholder="Type to summarize"
@@ -53,6 +48,8 @@ function App() {
               readOnly
             ></textarea>
           </div>
+        </div>
+        <div className="translate-buttons">
           <button className="translate-button" onClick={handleTranslate}>Translate text (26 languages)</button>
         </div>
       </div>
