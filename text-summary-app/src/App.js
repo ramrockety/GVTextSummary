@@ -28,6 +28,7 @@ function TextSummarizer() {
       setLoading(false);
     }
   };
+
   return (
     <div className="app">
       <nav className="navbar">
@@ -46,19 +47,19 @@ function TextSummarizer() {
         <div className="text-area-container">
           <div className="text-area">
             <form onSubmit={handleSubmit}>
-            <textarea
-              placeholder="Type to summarize"
-              onChange={handleInputChange}
-              value={inputText}
-              rows="5"
-            ></textarea>
-            <button type='submit' disabled={loading}>
-            {loading ? 'Summarizing...' : 'Summarize Text'}
-            </button>
+              <textarea
+                placeholder="Type to summarize"
+                onChange={handleInputChange}
+                value={inputText}
+                rows="5"
+              ></textarea>
+              <button type="submit" disabled={loading}>
+                {loading ? 'Summarizing...' : 'Summarize Text'}
+              </button>
             </form>
           </div>
           <div className="text-area">
-            <h2>Sumarized Text</h2>
+            <h2>Summarized Text</h2>
             <textarea
               placeholder="The translated text will appear here..."
               value={summaryText}
@@ -72,4 +73,4 @@ function TextSummarizer() {
   );
 }
 
-export default App;
+export default TextSummarizer; 
