@@ -1,23 +1,33 @@
-import React, { useState } from "react";
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function App() {
-  const [summary, setSummary] = useState("");
-  const [translatedText, setTranslatedText] = useState("");
+function TextSummarizer() {
+  // State to store the user input and the summarized output
+  const [inputText, setInputText] = useState('');
+  const [summaryText, setSummaryText] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    console.log("File uploaded:", file);
+  // Handle the text input change
+  const handleInputChange = (event) => {
+    setInputText(event.target.value);
   };
 
-  const handleSummarize = () => {
-    setSummary("This is the summarized text.");
+  // Handle form submission
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    try {
+      // Send the input text to the /text_summarize endpoint
+      const response = await axios.post('http://localhost:8000/text_summarize', { text: inputText });
+      // Update the summaryText state with the response from the API
+      setSummaryText(response.data.summary);
+    } catch (error) {
+      console.error('Error summarizing text:', error);
+      setSummaryText('Failed to summarize the text. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
-
-  const handleTranslate = () => {
-    setTranslatedText("This is the translated text.");
-  };
-
   return (
     <div className="app">
       <nav className="navbar">
@@ -35,22 +45,27 @@ function App() {
         </div>
         <div className="text-area-container">
           <div className="text-area">
+            <form onSubmit={handleSubmit}>
             <textarea
               placeholder="Type to summarize"
-              onChange={(e) => setSummary(e.target.value)}
-              value={summary}
+              onChange={handleInputChange}
+              value={inputText}
+              rows="5"
             ></textarea>
+            <button type='submit' disabled={loading}>
+            {loading ? 'Summarizing...' : 'Summarize Text'}
+            </button>
+            </form>
           </div>
           <div className="text-area">
+            <h2>Sumarized Text</h2>
             <textarea
               placeholder="The translated text will appear here..."
-              value={translatedText}
+              value={summaryText}
+              rows="5"
               readOnly
             ></textarea>
           </div>
-        </div>
-        <div className="translate-buttons">
-          <button className="translate-button" onClick={handleTranslate}>Translate text (26 languages)</button>
         </div>
       </div>
     </div>
