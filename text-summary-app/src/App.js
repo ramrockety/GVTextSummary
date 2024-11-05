@@ -18,7 +18,7 @@ function TextSummarizer() {
     setLoading(true);
     try {
       // Send the input text to the /text_summarize endpoint
-      const response = await axios.post('http://localhost:8000/text_summarize', { text: inputText });
+      const response = await axios.post('http://localhost:8000/text_summarize', { prompt: inputText });
       // Update the summaryText state with the response from the API
       setSummaryText(response.data.summary);
     } catch (error) {

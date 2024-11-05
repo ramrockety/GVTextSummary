@@ -9,14 +9,14 @@ I always insist on using schemas to have full control of the data flow from fe -
 
 from pydantic import BaseModel
 
-class TranslationRequestSchema(BaseModel):
-    text: str
-    languages: str
+class Language(BaseModel):
+    title: str
+    body: str
+    class Config():
+        from_attributes = True
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "text": "Hello, world!",
-                "languages": "english, german, russian"
-            }
-        }
+class ShowLanguage(BaseModel):
+    title: str
+    body: str
+    class Config():
+        from_attributes = True

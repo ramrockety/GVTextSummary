@@ -1,20 +1,14 @@
-# database.py
-
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, scoped_session
-from contextlib import asynccontextmanager
-from my_secrets import DATABASE_URL
+from sqlalchemy.orm import sessionmaker
+
+SQLALCHEMY_DATABASE_URL = 'sqlite:///./translation.db'
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={
+    "check_same_thread": False})# Fastapi uses connect_args
 
 
-
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:0000@localhost:5432/alphaloops_translator"
-
-
-
-engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False,)
 Base = declarative_base()
 
 def get_db():
