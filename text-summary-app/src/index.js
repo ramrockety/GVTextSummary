@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import TextSummarizer from './App'; // Import TextSummarizer from App.js
 import reportWebVitals from './reportWebVitals';
 
+// Use ReactDOM.createRoot instead of ReactDOM.render for React 18+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <TextSummarizer />
   </React.StrictMode>
 );
 
