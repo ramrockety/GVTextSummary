@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css';
 
 function TextSummarizer() {
   // State to store the user input and the summarized output
@@ -62,7 +63,7 @@ function TextSummarizer() {
             </form>
           </div>
           <div className="text-area">
-            <h2>Summarized Text</h2>
+            {/* <h2>Summarized Text</h2> */}
             <textarea
               placeholder="The translated text will appear here..."
               value={summaryText}
