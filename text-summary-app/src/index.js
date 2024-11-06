@@ -4,7 +4,7 @@ import './index.css';
 import TextSummarizer from './App'; // Import TextSummarizer from App.js
 import reportWebVitals from './reportWebVitals';
 
-// Use ReactDOM.createRoot instead of ReactDOM.render for React 18+
+// Initialize root and render the TextSummarizer component
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
@@ -12,7 +12,5 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Measure performance (optional)
 reportWebVitals();
