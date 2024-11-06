@@ -65,7 +65,7 @@ function TextSummarizer() {
           <div className="text-area">
             {/* <h2>Summarized Text</h2> */}
             <textarea
-              placeholder="The translated text will appear here..."
+              placeholder="The summarize and the translated text goes here..."
               value={summaryText}
               rows="5"
               readOnly
