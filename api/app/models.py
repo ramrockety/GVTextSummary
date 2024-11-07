@@ -28,6 +28,11 @@ class IndividualTranslations(Base):
     translated_text = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
+class TextSummarizer(Base):
+    __tablename__ = "text_summary"
+    id = Column(Integer, primary_key=True, index=True)
+    prompt = Column(String, nullable=False)
+
 # to ensure tables are created in the database
 engine = create_engine("postgresql+psycopg2://postgres:0000@localhost:5432/alphaloops_translator")
 Base.metadata.create_all(engine)

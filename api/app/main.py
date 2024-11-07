@@ -122,7 +122,7 @@ templates = Jinja2Templates(directory="templates")
 #         return {"status": request_obj.status}
 #     translations = db.query(TranslationResult).filter(TranslationResult.request_id == request_id).all()
 #     return templates.TemplateResponse("results.html", {"request": request, "translations": translations})
-
+import schemas
 
 
 llm = ChatGoogleGenerativeAI(
@@ -132,8 +132,8 @@ llm = ChatGoogleGenerativeAI(
     timeout=None,
     max_retries=2,
 )
-@app.post("/text_summarize")
-async def text_summarize(prompt):
+@app.post("/text_summarize", status_code=status.HTTP_201_CREATED)
+async def text_summarize(prompt: schemas.TextSummarize):
     """ This function will summarize 
     the text that is given to it """
     messages =[
@@ -141,7 +141,7 @@ async def text_summarize(prompt):
          "system",
          "You are a helpful assistant that summarize in any language given by the user"
         ),
-        ("human", prompt)
+        ("human", prompt.prompt)
     ]
     ai_msg = llm.invoke(messages)
     return ai_msg.content

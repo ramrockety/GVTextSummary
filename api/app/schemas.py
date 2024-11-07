@@ -20,3 +20,8 @@ class ShowLanguage(BaseModel):
     body: str
     class Config():
         from_attributes = True
+
+class TextSummarize(BaseModel):
+    prompt: str
+    class Config():
+        from_attributes = True
