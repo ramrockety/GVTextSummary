@@ -139,7 +139,8 @@ async def text_summarize(prompt: schemas.TextSummarize):
     messages =[
         (         
          "system",
-         "You are a helpful assistant that summarize in any language given by the user"
+         "You are a helpful assistant that summarize in any language given by the user,\
+          you will summarize the text using the exact language of the text given"
         ),
         ("human", prompt.prompt)
     ]
