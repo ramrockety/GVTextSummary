@@ -35,7 +35,7 @@ client = AsyncClient(
     user_id = os.getenv("PLAY_HT_USER_ID"),
     api_key = os.getenv("PLAY_HT_API_KEY")
 )
-options = TTSOptions(voice="s3://voice-cloning-zero-shot/775ae416-49bb-4fb6-bd45-740f205d20a1/jennifersaad/manifest.json")
+
 llm = ChatGoogleGenerativeAI(
     model="gemini-1.5-pro",
     temperature=0,
@@ -58,28 +58,28 @@ async def text_summarize(prompt: schemas.TextSummarize):
     return ai_msg.content
 
 @app.post("/text_translation", status_code=status.HTTP_201_CREATED)
-async def text_translation(prompt:schemas.TextTranslation, language:schemas.TextTranslation):
+async def text_translation(text:schemas.TextTranslation):
     """This function will give out the translation of
     the given text in the textbox"""
     messages =[
         ("system",
-         f"You are a helpful assistant that will translate the user text to {language.language} language"),
-         ("human", prompt.prompt)
+         f"You are a helpful assistant that will translate the user text to {text.language} language"),
+         ("human", text.prompt)
     ]
     ai_msg = llm.invoke(messages)
     return ai_msg.content
 
 @app.post("/audio_download", status_code=status.HTTP_201_CREATED)
-async def audio_download(prompt: schemas.TextTranslation, language: schemas.TextTranslation):
+async def audio_download(text: schemas.TextSummarize,):
     """This endpoint generates an audio file from the summarized text and serves it to the frontend."""
-
+    options = TTSOptions(voice="s3://voice-cloning-zero-shot/775ae416-49bb-4fb6-bd45-740f205d20a1/jennifersaad/manifest.json")
     # Path to store the generated audio file
     audio_file_path = "audio_summary.mp3"
 
     # Open a file in binary write mode to save the chunks
     async with aiofiles.open(audio_file_path, 'wb') as audio_file:
         # Iterate over audio chunks asynchronously
-        async for chunk in client.tts(prompt, language=language.language):
+        async for chunk in client.tts(text.prompt, options):
             # Write each chunk to the file
             await audio_file.write(chunk)
 

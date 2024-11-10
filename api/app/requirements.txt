@@ -7,3 +7,5 @@ jinja2
 openai
 python-dotenv
 langchain_google_genai
+pyht
+aiofiles
