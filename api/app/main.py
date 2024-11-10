@@ -6,6 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import os
 from dotenv import load_dotenv
+from pyht import AsyncClient
+from pyht.client import TTSOptions
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 load_dotenv()
@@ -28,7 +30,11 @@ app.add_middleware(
 templates = Jinja2Templates(directory="templates")
 import schemas
 
-
+client = AsyncClient(
+    user_id = os.getenv("PLAY_HT_USER_ID"),
+    api_key = os.getenv("PLAY_HT_API_KEY")
+)
+options = TTSOptions(voice="s3://voice-cloning-zero-shot/775ae416-49bb-4fb6-bd45-740f205d20a1/jennifersaad/manifest.json")
 llm = ChatGoogleGenerativeAI(
     model="gemini-1.5-pro",
     temperature=0,
@@ -61,3 +67,9 @@ async def text_translation(prompt:schemas.TextTranslation, language:schemas.Text
     ]
     ai_msg = llm.invoke(messages)
     return ai_msg.content
+
+@app.post("/audio_download", status_code=status.HTTP_201_CREATED)
+async def audio_download(prompt: schemas.TextTranslation, language: schemas.TextTranslation):
+    """ This function will get the audio of the translated summary for the user"""
+    async for chunk in client.tts(prompt,language=language):
+        print(type(chunk))
