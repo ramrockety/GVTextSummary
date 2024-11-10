@@ -1,16 +1,14 @@
 import logging
-from fastapi import FastAPI, BackgroundTasks, HTTPException, Request, status
+from fastapi import FastAPI, status
 from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
 import os
 import aiofiles
 from dotenv import load_dotenv
 from pyht import AsyncClient
 from pyht.client import TTSOptions
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.prompts import ChatPromptTemplate
 load_dotenv()
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
 
@@ -70,7 +68,7 @@ async def text_translation(text:schemas.TextTranslation):
     return ai_msg.content
 
 @app.post("/audio_download", status_code=status.HTTP_201_CREATED)
-async def audio_download(text: schemas.TextSummarize,):
+async def audio_download(text: schemas.TextSummarize):
     """This endpoint generates an audio file from the summarized text and serves it to the frontend."""
     options = TTSOptions(voice="s3://voice-cloning-zero-shot/775ae416-49bb-4fb6-bd45-740f205d20a1/jennifersaad/manifest.json")
     # Path to store the generated audio file
