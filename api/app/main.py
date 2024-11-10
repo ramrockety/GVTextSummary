@@ -1,10 +1,11 @@
 import logging
-from fastapi import FastAPI, BackgroundTasks, HTTPException, Depends, Request, status
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, BackgroundTasks, HTTPException, Request, status
+from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import os
+import aiofiles
 from dotenv import load_dotenv
 from pyht import AsyncClient
 from pyht.client import TTSOptions
@@ -70,6 +71,17 @@ async def text_translation(prompt:schemas.TextTranslation, language:schemas.Text
 
 @app.post("/audio_download", status_code=status.HTTP_201_CREATED)
 async def audio_download(prompt: schemas.TextTranslation, language: schemas.TextTranslation):
-    """ This function will get the audio of the translated summary for the user"""
-    async for chunk in client.tts(prompt,language=language):
-        print(type(chunk))
+    """This endpoint generates an audio file from the summarized text and serves it to the frontend."""
+
+    # Path to store the generated audio file
+    audio_file_path = "audio_summary.mp3"
+
+    # Open a file in binary write mode to save the chunks
+    async with aiofiles.open(audio_file_path, 'wb') as audio_file:
+        # Iterate over audio chunks asynchronously
+        async for chunk in client.tts(prompt, language=language.language):
+            # Write each chunk to the file
+            await audio_file.write(chunk)
+
+    # Ensure the file is saved and then send it as a downloadable response
+    return FileResponse(audio_file_path, media_type="audio/mpeg", filename="audio_summary.mp3")
