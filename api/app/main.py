@@ -5,6 +5,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 import os
 import aiofiles
+import schemas
 from dotenv import load_dotenv
 from pyht import AsyncClient
 from pyht.client import TTSOptions
@@ -27,7 +28,6 @@ app.add_middleware(
 )
 
 templates = Jinja2Templates(directory="templates")
-import schemas
 
 client = AsyncClient(
     user_id = os.getenv("PLAY_HT_USER_ID"),
