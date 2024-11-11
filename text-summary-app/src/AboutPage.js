@@ -6,7 +6,7 @@ function AboutPage() {
     <div className="about-container">
       <h2>About GVTextSummary</h2>
       <p>
-        **GVTextSummary** is an intelligent text-processing application designed to help users
+        GVTextSummary is an intelligent text-processing application designed to help users
         quickly and effectively summarize and translate large bodies of text. Whether you are 
         working with long articles, documents, or any other form of textual data, GVTextSummary 
         leverages advanced Natural Language Processing (NLP) models to deliver high-quality summaries 

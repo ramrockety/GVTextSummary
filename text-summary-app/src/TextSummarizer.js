@@ -80,11 +80,6 @@ function TextSummarizer() {
   return (
     <div className="app">
       <nav className="navbar">
-        <h1>GVTEXTSUMMARY</h1>
-        <div className="nav-links">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-        </div>
         <div className="lang-select">
           <select value={selectedLanguage} onChange={handleLanguageChange}>
             {languages.map((lang) => (
