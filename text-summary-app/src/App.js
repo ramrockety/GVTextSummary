@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
 function TextSummarizer() {
-  // State to store the user input, summarized output, translated text, and language selection
   const [inputText, setInputText] = useState('');
-  const [summaryText, setSummaryText] = useState('');
-  const [translatedText, setTranslatedText] = useState('');
+  const [outputText, setOutputText] = useState('');
   const [loading, setLoading] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('ENGLISH');
   const [audioUrl, setAudioUrl] = useState(null);
@@ -36,10 +34,10 @@ function TextSummarizer() {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:8000/text_summarize', { prompt: inputText });
-      setSummaryText(response.data);
+      setOutputText(response.data);
     } catch (error) {
       console.error('Error summarizing text:', error);
-      setSummaryText('Failed to summarize the text. Please try again.');
+      setOutputText('Failed to summarize the text. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -48,26 +46,27 @@ function TextSummarizer() {
   // Handle translation
   const handleTranslate = async () => {
     setLoading(true);
+    console.log('Text to translate:', inputText);
+    console.log('Selected language:', selectedLanguage);
     try {
-      const response = await axios.post('http://localhost:8000/translate_text', {
-        text: summaryText,
-        language: selectedLanguage,
+      const response = await axios.post('http://localhost:8000/text_translation', {
+        prompt: inputText,
+        language: selectedLanguage
       });
-      setTranslatedText(response.data);
+      setOutputText(response.data);
     } catch (error) {
       console.error('Error translating text:', error);
-      setTranslatedText('Failed to translate the text. Please try again.');
+      setOutputText('Failed to translate the text. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Generate audio from translated or summarized text
+  // Generate audio from output text
   const handleGenerateAudio = async () => {
     try {
       const response = await axios.post('http://localhost:8000/audio_download', {
-        text: translatedText || summaryText,
-        language: selectedLanguage,
+        prompt: outputText
       }, { responseType: 'blob' });
 
       const audioBlob = new Blob([response.data], { type: 'audio/mp3' });
@@ -99,11 +98,11 @@ function TextSummarizer() {
         <div className="top-buttons">
           <button className="download-button" onClick={handleGenerateAudio}>Generate Audio</button>
           <button className="download-button" onClick={() => {
-            const blob = new Blob([translatedText || summaryText], { type: 'text/plain' });
+            const blob = new Blob([outputText], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'summary.txt';
+            link.download = 'output_text.txt';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -114,33 +113,24 @@ function TextSummarizer() {
           <div className="text-area">
             <form onSubmit={handleSummarize}>
               <textarea
-                placeholder="Type to summarize"
+                placeholder="Type to summarize or translate"
                 onChange={handleInputChange}
                 value={inputText}
                 rows="5"
               ></textarea>
               <button type="submit" disabled={loading}>
-                {loading ? 'Summarizing...' : 'Summarize Text'}
+                {loading ? 'Processing...' : 'Summarize Text'}
               </button>
             </form>
-          </div>
-
-          <div className="text-area">
-            <textarea
-              placeholder="The summarized text goes here..."
-              value={summaryText}
-              rows="5"
-              readOnly
-            ></textarea>
             <button onClick={handleTranslate} disabled={loading}>
-              {loading ? 'Translating...' : 'Translate Text'}
+              {loading ? 'Processing...' : 'Translate Text'}
             </button>
           </div>
 
           <div className="text-area">
             <textarea
-              placeholder="The translated text goes here..."
-              value={translatedText}
+              placeholder="The output text goes here..."
+              value={outputText}
               rows="5"
               readOnly
             ></textarea>
@@ -150,7 +140,7 @@ function TextSummarizer() {
         {audioUrl && (
           <div>
             <audio controls src={audioUrl}></audio>
-            <a href={audioUrl} download="summary_audio.mp3" className="download-button">
+            <a href={audioUrl} download="output_audio.mp3" className="download-button">
               Download Audio
             </a>
           </div>
