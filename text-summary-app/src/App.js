@@ -118,13 +118,13 @@ function TextSummarizer() {
                 value={inputText}
                 rows="5"
               ></textarea>
-              <button type="submit" disabled={loading}>
+              <button className= "summarize-button" type="submit" disabled={loading}>
                 {loading ? 'Processing...' : 'Summarize Text'}
               </button>
-            </form>
-            <button onClick={handleTranslate} disabled={loading}>
+              <button className = "translate-button" onClick={handleTranslate} disabled={loading}>
               {loading ? 'Processing...' : 'Translate Text'}
-            </button>
+              </button>
+            </form>
           </div>
 
           <div className="text-area">
