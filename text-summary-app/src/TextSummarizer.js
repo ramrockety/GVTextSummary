@@ -33,7 +33,7 @@ function TextSummarizer() {
     event.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/text_summarize', { prompt: inputText });
+      const response = await axios.post('https://gvtextsummary-2.onrender.com/text_summarize', { prompt: inputText });
       setOutputText(response.data);
     } catch (error) {
       console.error('Error summarizing text:', error);
@@ -49,7 +49,7 @@ function TextSummarizer() {
     console.log('Text to translate:', inputText);
     console.log('Selected language:', selectedLanguage);
     try {
-      const response = await axios.post('http://localhost:8000/text_translation', {
+      const response = await axios.post('https://gvtextsummary-2.onrender.com/text_translation', {
         prompt: inputText,
         language: selectedLanguage
       });
@@ -65,7 +65,7 @@ function TextSummarizer() {
   // Generate audio from output text
   const handleGenerateAudio = async () => {
     try {
-      const response = await axios.post('http://localhost:8000/audio_download', {
+      const response = await axios.post('https://gvtextsummary-2.onrender.com/audio_download', {
         prompt: outputText
       }, { responseType: 'blob' });
 
