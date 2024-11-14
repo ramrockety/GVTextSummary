@@ -122,7 +122,7 @@ function TextSummarizer() {
             </form>
           </div>
 
-          <div className="text-area">
+          <div className="text-area-output">
             <textarea
               placeholder="The output text goes here..."
               value={outputText}
