@@ -130,6 +130,7 @@ function TextSummarizer() {
               readOnly
             ></textarea>
           </div>
+
         </div>
 
         {audioUrl && (
