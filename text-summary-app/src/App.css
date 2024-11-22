@@ -67,14 +67,14 @@ body {
 
 .download-button {
   margin-left: 250px; 
-  margin-right: -200px; 
+  margin-right: -220px; 
 }
 
 .parent-container {
   display: block; /* Ensure the container allows vertical stacking */
   position: relative;
   overflow: visible;
-  padding: 0px;
+  padding: -20px,10;
   margin-top: -60px;
 }
 
