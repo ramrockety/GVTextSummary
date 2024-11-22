@@ -66,10 +66,17 @@ body {
 }
 
 .download-button {
-  margin-left: 60px;
-  margin-right: 40px;
+  margin-left: 190px;
+  margin-right: -120px;
 }
-
+.audio-button{
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .translate-button,
 .summarize-button {
   margin-top: 10px;
@@ -89,6 +96,7 @@ body {
   gap: 30px;
   flex-wrap: wrap;
   margin-bottom: 20px;
+
 }
 
 .text-area,
@@ -101,9 +109,8 @@ body {
   margin-top: -100px;
 }
 
-.text-area textarea,
-.text-area-output textarea {
-  width: 100%;
+.text-area textarea{
+  width: 200%;
   height: 350px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -111,6 +118,19 @@ body {
   resize: none;
   font-size: 16px;
   margin-top: 10px;
+  margin-left: -180px;
+}
+
+.text-area-output textarea {
+  width: 200%;
+  height: 350px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-left: 180px;
 }
 
 /* Responsive Design */
