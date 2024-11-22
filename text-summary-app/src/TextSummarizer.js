@@ -134,8 +134,8 @@ function TextSummarizer() {
         </div>
 
         {audioUrl && (
-          <div>
-            <audio controls src={audioUrl}></audio>
+          <div className="parent-container">
+            <audio className="audio-element" controls src={audioUrl}></audio>
             <a href={audioUrl} download="output_audio.mp3" className="audio-button">
               Download Audio
             </a>
