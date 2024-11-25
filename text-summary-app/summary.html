@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="./GVTEXTSUMMARY_logo_transparent.png">
+    <link rel="stylesheet" href="./summary.css">
+</head>
+<body>
+    <div class="general">
+        <header class="header nav-container">
+            <nav class="top">
+                <h1>GV<span>TEXT</span>SUMMARISER</h1>
+
+
+                <div class="nav-text">
+                    <a href="#" class="abt">Home</a>
+                    <a href="#" class="abt">About</a>
+
+                    
+
+                </div>
+
+                
+            </nav>
+        </header>
+
+
+
+        <form action="/submit" method="post" class="container">
+            <!-- <label for="languages">Choose your language:</label> -->
+            <select id="languages" name="language" required>
+                <option value="">Select a Language</option>
+                <option value="english">English</option>
+                <option value="spanish">Spanish</option>
+                <option value="french">French</option>
+                <option value="german">German</option>
+                <option value="chinese">Chinese</option>
+                <option value="japanese">Japanese</option>
+                <option value="arabic">Arabic</option>
+                <option value="portuguese">Portuguese</option>
+                <option value="hindi">Hindi</option>
+            </select>
+            <br><br>
+            <!-- <button type="submit">Submit</button> -->
+        </form> 
+
+
+
+        <div class="btn container">
+            <button class="btn-all" onclick="playAudio()">Generate audio</button>
+            <button class="btn-all" onclick="downloadText()">Download text</button>
+        </div>
+
+
+
+
+        <div class="section">
+            <div class="container grid-2-cols">
+                <div class="input">
+                    <textarea class="textarea" placeholder="About you word"></textarea>
+                    
+                </div>
+                <div class="output">
+                    <textarea class="textarea textarea-edit" placeholder="Your translation"></textarea>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="btn container">
+            <button class="btn-all" onclick="summarizeText()">Summarize</button>
+            <button class="btn-all" onclick="translateText()">Translate</button>
+        </div>
+        
+
+    </div>
+</body>
+</html>
+
+</body>
+</html>

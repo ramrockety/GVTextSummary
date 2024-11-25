@@ -1,0 +1,142 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 62.5%;
+}
+.nav-container{
+    max-width: 100vw;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    padding: 2rem 0;
+    background-color: #eee;
+}
+.container{
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+}
+
+.top{
+    display: flex;
+    justify-content: space-around;
+}
+.nav-text{
+    display: flex;
+    gap: 8rem;
+}
+
+/***************STYLEING THE FORM******************/
+form {
+    font-family: Arial, sans-serif;
+    padding-top: 1rem;
+}
+/****************************************************/
+h1{
+    color: #444;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+span{
+    color: #cf711f;
+}
+.abt:link, .abt:visited{
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: #666;
+}
+.grid-2-cols{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.textarea {
+    width: 100%;
+    height: 30rem;
+    padding: 10px;
+    font-size: 1.6rem;
+    resize: none; 
+    color: #666;
+    padding: 1.2rem;
+    border-radius: 9px 0 0 9px;
+    border: 1px solid #aaa;
+    outline: none;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    height: 35rem;
+    transition: all 0.2s;
+}
+.textarea-edit{
+    border-radius: 0 9px 9px 0;
+}
+.textarea:hover{
+    cursor: pointer;
+}
+.textarea:focus{
+    cursor: text;
+    color: #333;
+}
+.btn-all{
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #eee;
+    background-color: #646165;
+    font-weight: 700;
+} 
+.btn{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin: 1.4rem auto;
+}
+
+/* 
+ */
+
+/* 
+.section{
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding: 0;
+
+   
+}
+
+.input, .output{
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+}
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+.btn-all{
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    background-color: #333;
+    color: #fff;
+}
+.btn-all:hover{
+    scale: 1.04;
+    transition: 0.2s;
+    background-color: #000;
+    color: #fff;
+} */
